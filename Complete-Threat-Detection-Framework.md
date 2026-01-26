@@ -120,7 +120,7 @@ The attack is only true when **both occur together**.
 
 ## Composite Threat Hunt Portfolio
 
-This repository is organised around **Composite Hunts** covering the most critical attack surfaces across endpoint, identity, and cloud environments.
+This repository is organised around **Composite Hunts** covering the most critical attack surfaces across endpoint, identity, and cloud environments. (Always Changing and expanding)
 
 ### Implemented & Active Composite Rules
 
