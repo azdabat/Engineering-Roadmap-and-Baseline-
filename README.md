@@ -50,40 +50,40 @@ These are the “foundation sensors”. They should exist even if Tier-2/3 doesn
 ## TA0001 Initial Access
 | Composite Ecosystem | Minimum Truth | Cousins | Telemetry | Status |
 |---|---|---|---|---|
-| Phishing Click-Through / BEC Surfacing | URL click + risky destination OR mailbox rule/persistence | SafeLinks vs non-SafeLinks variants | EmailEvents/UrlClickEvents (MDE), Sentinel mail logs | 🧪 POC (present in POC repo) |
-| Internet-Facing Exposure / Exploit Surfacing | device/service exposed + exploit-ish behaviour indicators | web app RCE “post-exploit” pivot | DeviceNetworkEvents + device inventory | 🧪 POC (present in POC repo) |
+| Phishing Click-Through / BEC Surfacing | URL click + risky destination OR mailbox rule/persistence | SafeLinks vs non-SafeLinks variants | EmailEvents/UrlClickEvents (MDE), Sentinel mail logs |  POC (present in POC repo) |
+| Internet-Facing Exposure / Exploit Surfacing | device/service exposed + exploit-ish behaviour indicators | web app RCE “post-exploit” pivot | DeviceNetworkEvents + device inventory |  POC (present in POC repo) |
 
 ## TA0002 Execution
 | Composite Ecosystem | Minimum Truth | Cousins | Telemetry | Status |
 |---|---|---|---|---|
-| LOLBIN Proxy Execution Baseline | signed LOLBIN used with suspicious execution primitive | task-spawned LOLBIN cousin | DeviceProcessEvents | 🧪 POC (multiple packs exist) |
-| PowerShell Execution Baseline | PowerShell with high-risk primitives (enc/iex/download) | AMSI bypass cousin | DeviceProcessEvents + AMSI telemetry | ✅/🧪 (PS cradle rules exist in Production-READY; AMSI bypass POC exists) |
+| LOLBIN Proxy Execution Baseline | signed LOLBIN used with suspicious execution primitive | task-spawned LOLBIN cousin | DeviceProcessEvents |  POC (multiple packs exist) |
+| PowerShell Execution Baseline | PowerShell with high-risk primitives (enc/iex/download) | AMSI bypass cousin | DeviceProcessEvents + AMSI telemetry | ✅ (PS cradle rules exist in Production-READY; AMSI bypass POC exists) |
 
 ## TA0003 Persistence
 | Composite Ecosystem | Minimum Truth | Cousins | Telemetry | Status |
 |---|---|---|---|---|
-| Registry Autoruns Persistence | autorun key write | hijack/interception cousins (IFEO/COM/AppInit/Winlogon) | DeviceRegistryEvents | 🧪 POC (present) |
-| Scheduled Task Persistence | TaskCache write OR task XML drop | “no schtasks.exe” svchost/taskeng cousin | Registry + File + Process | ✅/🧪 (task + cousin work exists) |
+| Registry Autoruns Persistence | autorun key write | hijack/interception cousins (IFEO/COM/AppInit/Winlogon) | DeviceRegistryEvents |  POC (present) |
+| Scheduled Task Persistence | TaskCache write OR task XML drop | “no schtasks.exe” svchost/taskeng cousin | Registry + File + Process | ✅ (task + cousin work exists) |
 | WMI Persistence | WMI permanent subscription artefacts | WMI consumer execution cousin | WMI tables / DeviceEvents | ✅ (WMI L2 rules exist in Production-READY) |
 
 ## TA0004 Privilege Escalation
 | Composite Ecosystem | Minimum Truth | Cousins | Telemetry | Status |
 |---|---|---|---|---|
-| BYOVD / LOLDriver Escalation | driver/service install + untrusted driver load | staged/delayed driver cousins | DeviceEvents + registry/service | 🧪 POC (present) |
+| BYOVD / LOLDriver Escalation | driver/service install + untrusted driver load | staged/delayed driver cousins | DeviceEvents + registry/service |  POC (present) |
 | Token / Identity privilege shift | privileged token use / app role assignment | service principal backdoor cousin | Entra logs + cloud audit | ✅ (Service_Principal_Backdoor exists) |
 
 ## TA0005 Defense Evasion
 | Composite Ecosystem | Minimum Truth | Cousins | Telemetry | Status |
 |---|---|---|---|---|
-| Obfuscation / Masquerade Baseline | suspicious rename/path mismatch + execution | polymorphic loader cousin | File + Process | 🧪 POC (present) |
-| EDR Tamper / Degrade | security control changed or disabled | driver-based EDR tamper cousin | DeviceEvents/DeviceInfo | 🧪 POC (present) |
+| Obfuscation / Masquerade Baseline | suspicious rename/path mismatch + execution | polymorphic loader cousin | File + Process |  POC (present) |
+| EDR Tamper / Degrade | security control changed or disabled | driver-based EDR tamper cousin | DeviceEvents/DeviceInfo |  POC (present) |
 
 ## TA0006 Credential Access
 | Composite Ecosystem | Minimum Truth | Cousins | Telemetry | Status |
 |---|---|---|---|---|
 | LSASS Access / Dump | LSASS read/open OR dump primitive | comsvcs/werfault/procdump cousins | Process + memory access telemetry | ✅ (Composite LSASS rules exist) |
-| Kerberoasting | TGS anomalies / weak enc usage | endpoint heuristic cousin | Identity logs + endpoint signals | 🧪 POC (present) |
-| Secrets Discovery (files) | credential keyword file access | browser stores / unsafe stores cousin | File events | 🧪 POC (present) |
+| Kerberoasting | TGS anomalies / weak enc usage | endpoint heuristic cousin | Identity logs + endpoint signals |  POC (present) |
+| Secrets Discovery (files) | credential keyword file access | browser stores / unsafe stores cousin | File events |  POC (present) |
 
 ## TA0007 Discovery
 | Composite Ecosystem | Minimum Truth | Cousins | Telemetry | Status |
@@ -95,21 +95,21 @@ These are the “foundation sensors”. They should exist even if Tier-2/3 doesn
 |---|---|---|---|---|
 | SMB Service Lateral | inbound SMB/RPC + `services.exe` execution chain | scheduled task surface cousin | Network + Process + (optional service install) | ✅ (SMB_Service_Execution_Org_Prev exists) |
 | WMI Remote Exec | remote process created via WMI | DCOM/WinRM cousins | Process + WMI / auth | ✅ (WMI remote creation exists) |
-| RDP Follow-on | suspicious drop then RDP use | interactive logon cousin | File + Logon | 🧪 POC (present) |
+| RDP Follow-on | suspicious drop then RDP use | interactive logon cousin | File + Logon |  POC (present) |
 
 ## TA0011 Command & Control
 | Composite Ecosystem | Minimum Truth | Cousins | Telemetry | Status |
 |---|---|---|---|---|
-| Named Pipe C2 / Lateral Mesh | named pipe deviation + rarity + context | SMB pipe + service install cousins | DeviceEvents + Network + (Sentinel 7045 optional) | 🧪 Advanced POC (present) |
-| HTTPS Beaconing (Jitter) | repeated small HTTPS + interval/jitter pattern | browser-like suppression cousin | DeviceNetworkEvents | 🧪 POC (present) |
-| Suspicious Outbound / TOR | rare dest + risky infra | miner C2 cousin | Network + TI feeds optional | 🧪 POC (present) |
-| Blockchain RPC C2 (Web3 abuse) | RPC provider comms + beacon-like pattern + non-dev host | EtherRAT ecosystem cousin | DeviceNetworkEvents + process context | 🧪 POC (present) |
+| Named Pipe C2 / Lateral Mesh | named pipe deviation + rarity + context | SMB pipe + service install cousins | DeviceEvents + Network + (Sentinel 7045 optional) |  Advanced POC (present) |
+| HTTPS Beaconing (Jitter) | repeated small HTTPS + interval/jitter pattern | browser-like suppression cousin | DeviceNetworkEvents |  POC (present) |
+| Suspicious Outbound / TOR | rare dest + risky infra | miner C2 cousin | Network + TI feeds optional |  POC (present) |
+| Blockchain RPC C2 (Web3 abuse) | RPC provider comms + beacon-like pattern + non-dev host | EtherRAT ecosystem cousin | DeviceNetworkEvents + process context |  POC (present) |
 
 ## TA0010 Exfiltration
 | Composite Ecosystem | Minimum Truth | Cousins | Telemetry | Status |
 |---|---|---|---|---|
-| Clipboard / Staging Exfil | clipboard events + suspicious chain | archive tooling cousin | Clipboard + Process | 🧪 POC (present) |
-| SMB Exfil (critical shares) | critical share access + abnormal actor | admin share cousin | Network + auth | 🧪 POC (present) |
+| Clipboard / Staging Exfil | clipboard events + suspicious chain | archive tooling cousin | Clipboard + Process |  POC (present) |
+| SMB Exfil (critical shares) | critical share access + abnormal actor | admin share cousin | Network + auth |  POC (present) |
 
 ## TA0040 Impact
 | Composite Ecosystem | Minimum Truth | Cousins | Telemetry | Status |
@@ -147,8 +147,8 @@ Tier-2 is where you operationalise “attack architecture” without shipping mo
 
 ## 4) Credential Access Ecosystem (LSASS + Kerberos + NTDS)
 - ✅ LSASS composite (access truth + reinforcement + scoring)
-- ✅/🧪 NTDS composite variants
-- 🧪 Kerberoasting variants (Sentinel-only vs MDE-only)
+- ✅/ NTDS composite variants
+-  Kerberoasting variants (Sentinel-only vs MDE-only)
 - Cousins:
   - ⬜ DCSync / replication abuse (directory/audit plane)
   - ⬜ DPAPI / browser credential store theft (endpoint plane)
@@ -160,13 +160,13 @@ You don’t “win” C2 by timing alone. Convergence lives in **cross-signal ag
 > Timing is *one* feature. Convergence is when timing + rarity + process context + infra context agree.
 
 Planned composites
-- 🧪 Named Pipe C2 + Lateral correlation (rarity + SMB + service context)
-- 🧪 HTTPS jitter beaconing (interval/jitter + low bytes + non-browser penalty + prevalence)
-- 🧪 Blockchain RPC C2 (RPC providers + beacon-like + non-dev host + suspicious process)
+-  Named Pipe C2 + Lateral correlation (rarity + SMB + service context)
+-  HTTPS jitter beaconing (interval/jitter + low bytes + non-browser penalty + prevalence)
+-  Blockchain RPC C2 (RPC providers + beacon-like + non-dev host + suspicious process)
 
 Cousins
-- ⬜ “Same destination across many hosts” (botnet-like) vs “single-host rare beacon”
-- ⬜ “C2 over legitimate app (browser/webview)” separate anchor + heavier suppression
+-  “Same destination across many hosts” (botnet-like) vs “single-host rare beacon”
+-  “C2 over legitimate app (browser/webview)” separate anchor + heavier suppression
 
 ---
 
