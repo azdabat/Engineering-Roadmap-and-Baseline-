@@ -19,10 +19,10 @@ We build by **Truth Domain + Ecosystem Boundary**, then mature each ecosystem in
 | Registry Persistence (Hijacks) | COM / IFEO / AppInit Artifacts | ✅ Yes | ⚠️ Partial | ❌ Not Yet | MED |
 | Scheduled Tasks (CLI) | `schtasks.exe /create` Process Truth | ✅ Yes | ✅ Strong | ✅ Tested | HIGH |
 | Scheduled Tasks (Silent / TaskCache) | TaskCache Registry Truth | ✅ Yes | ⚠️ Needs Noise Convergence | ⚠️ In Progress | MED |
-| Services Persistence | Service ImagePath Registry Truth | ⚠️ Partial | ❌ Not Tuned | ❌ Not Yet | LOW |
-| Credential Access (LSASS) | LSASS Access / Dump Tooling | ✅ Yes | ⚠️ Partial | ⚠️ In Progress | MED |
+| Services Persistence | Service ImagePath Registry Truth | ⚠️ Partial | ❌ Not Tuned |  ✅ Tested  | MED |
+| Credential Access (LSASS) | LSASS Access / Dump Tooling | ✅ Yes | ⚠️ Partial |  ✅ Tested | MED |
 | Credential Access (NTDS/SAM) | NTDS / Hive Interaction Truth | ✅ Yes | ⚠️ Partial | ❌ Not Yet | MED |
-| LOLBin Proxy Execution | Signed Binary Misuse Surface | ✅ Yes | ⚠️ Needs Baselines | ❌ Not Yet | MED |
+| LOLBin Proxy Execution | Signed Binary Misuse Surface | ✅ Yes | ✅ Strong | ✅ Tested | MED |
 | Lateral Movement (SMB/WMI/DCOM) | Remote Exec Mechanism Truth | ⚠️ Partial | ❌ Not Tuned | ❌ Not Yet | LOW |
 | Cloud Identity (OAuth Consent) | High-Risk Scope Grant Truth | ✅ Yes | ✅ Strong | ⚠️ Needs Tenant Validation | HIGH |
 
