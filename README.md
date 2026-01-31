@@ -1,6 +1,6 @@
 # ROADMAP.md — Enterprise Detection Coverage (Tier-1 / Tier-2 / Tier-3)
 **Author:** Ala Dabat  
-**WORK IN PROGRESS**
+**WORK IN PROGRESS** </BR>
 **Platform:** Microsoft Defender XDR (MDE Advanced Hunting) + Microsoft Sentinel (where noted)  
 **Method:** Minimum Truth → Reinforcement (Convergence) → Noise Suppression → Scoring/Confidence → SOC Directives  
 **Principle:** Cluster techniques into **Composite Ecosystems**, not 1:1 “atomic rules”.
